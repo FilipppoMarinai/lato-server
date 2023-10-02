@@ -7,20 +7,30 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Server {
+    //istanzio il server del socket
     ServerSocket server = null;
+    //istanzio un socket
     Socket client = null;
+    //istanzio una stringa che conterrà quella ricevuta dal client
     String stringaRicevuta = null;
+    //istanzio una stringa che conterrà la stringa modificata da mandare al client
     String stringaModificata = null;
+    //istanzio un canale per prendere in input ciò che arriva dal client
     BufferedReader inDalClient;
+    //istanzio un canale per mandare una risposta al client
     DataOutputStream outVersoClient;
 
     public Socket attendi(){
         try{
             System.out.println("Server in esecuzione");
-            server = new ServerSocket(6524);
+            //creo un socket sulla porta
+            server = new ServerSocket(6420);
+            //il socket rimane in attesa di un client
             client = server.accept();
 
+            //creo il canale per prendere in input la stringa dal client
             inDalClient = new BufferedReader(new InputStreamReader(client.getInputStream()));
+            //creo un canale per mandare una risposta al client
             outVersoClient = new DataOutputStream(client.getOutputStream());
         }
         catch(Exception e){
